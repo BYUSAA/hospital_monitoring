@@ -1,18 +1,21 @@
 #!/bin/bash
+# heart_rate_monitor.sh
 
-# Heart Rate Monitoring Script
-
-# Prompt for device name
-echo "Enter the device name (e.g., Monitor_A):"
+# Prompt user for the device name
+echo "Enter the device name (e.g., Monitor_A, Monitor_B): "
 read device_name
 
-# Log heart rate data to heart_rate_log.txt
+# Start logging heart rate data every second
+echo "Starting heart rate monitoring for $device_name..."
+
+# Running infinite loop in the background
 while true
 do
-    # Generate timestamp, device name, and random heart rate (between 40 and 120)
+    # Log the timestamp, device name, and simulated heart rate (random value between 40-120)
     echo "$(date '+%Y-%m-%d %H:%M:%S') $device_name $((40 + RANDOM % 81))" >> heart_rate_log.txt
-    sleep 1
+    sleep 1  # Record every second
 done &
-# Output the process ID (PID) of the script
-echo "Heart rate monitoring started with PID: $!"
+
+# Display the background process ID (PID)
+echo "Heart rate monitor started with PID: $!"
 
