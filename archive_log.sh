@@ -1,13 +1,13 @@
 #!/bin/bash
+# archive_log.sh
 
-# Log Archival Script
-
-# Generate timestamp in YYYYMMDD_HHMMSS format
+# Generate the current timestamp
 timestamp=$(date '+%Y%m%d_%H%M%S')
 
-# Rename the heart_rate_log.txt file with the timestamp
+# Rename the log file by appending the timestamp
 mv heart_rate_log.txt heart_rate_log.txt_$timestamp
 
-# Output the new name of the archived log file
-echo "Log file archived as heart_rate_log.txt_$timestamp"
+# Create a new empty log file for future logging
+touch heart_rate_log.txt
 
+echo "Log file archived as heart_rate_log.txt_$timestamp"
