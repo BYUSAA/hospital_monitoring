@@ -1,13 +1,25 @@
 #!/bin/bash
 
-# Log Archival Script
+# Archival and Backup Script
 
-# Generate timestamp in YYYYMMDD_HHMMSS format
-timestamp=$(date '+%Y%m%d_%H%M%S')
+# Define group number and the directory for archived logs
+group_number=1  # Replace with your group number
+archive_directory="archived_logs_group$group_number"
 
-# Rename the heart_rate_log.txt file with the timestamp
-mv heart_rate_log.txt heart_rate_log.txt_$timestamp
+# Create the directory if it doesn't exist
+mkdir -p $archive_directory
 
-# Output the new name of the archived log file
-echo "Log file archived as heart_rate_log.txt_$timestamp"
+# Move all archived log files (heart_rate_log.txt_*) into the archive directory
+mv heart_rate_log.txt_* $archive_directory/
+
+# Define remote server details (replace with actual values)
+remote_host="your-remote-host"
+remote_user="your-remote-user"
+remote_directory="/home/"
+
+# Perform the backup using scp to the remote server
+scp $archive_directory/* $remote_user@$remote_host:$remote_directory
+
+# Output completion message
+echo "Backup completed to $remote_host in directory $remote_directory"
 
